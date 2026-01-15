@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: ChatApp_discussion
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mdp
+      POSTGRES_DB: discussion
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./data/postgre:/data/db
+    restart: always
+
+volumes:
+  postgres_data:

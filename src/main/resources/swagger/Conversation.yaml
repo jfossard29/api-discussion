@@ -1,0 +1,541 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Conversation
+  summary: ''
+paths:
+  /conversation:
+    get:
+      summary: Conversations
+      operationId: Conversations
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create conversation
+      operationId: create-conversation
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/conversation/{conversationId}':
+    get:
+      summary: Conversation
+      operationId: conversation
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not a member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update conversation
+      operationId: update-conversation
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conversation'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete conversation
+      operationId: delete-conversation
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/conversation/{conversationId}/member':
+    get:
+      summary: Conversation members
+      operationId: conversation-members
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not a member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Add conversation members
+      operationId: add-conversation-members
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Kick conversation members
+      operationId: kick-conversation-members
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: ids
+          in: query
+          description: The IDs of the conversation members to kick
+          required: true
+          schema:
+            type: array
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator / Not you
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/conversation/{conversationId}/member/{memberId}':
+    get:
+      summary: Conversation member
+      operationId: conversation-member
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+        - name: memberId
+          in: path
+          description: The ID of the member
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not a member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update conversation member
+      operationId: update-conversation-member
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+        - name: memberId
+          in: path
+          description: The ID of the member
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Kick conversation member
+      operationId: kick-conversation-member
+      parameters:
+        - name: token
+          in: header
+          description: An authentication token
+          required: true
+          schema:
+            type: string
+        - name: conversationId
+          in: path
+          description: The ID of the conversation
+          required: true
+          schema:
+            type: string
+        - name: memberId
+          in: path
+          description: The ID of the member
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not an administrator / Not you
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Conversation:
+      type: object
+      title: Conversation
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+    Error:
+      type: object
+      title: Error
+      description: Describes an error
+      properties:
+        error:
+          type: boolean
+          default: true
+        message:
+          type: string
+        field:
+          type: string
+      required:
+        - error
+        - message
+    Member:
+      type: object
+      title: Member
+      properties:
+        id:
+          type: string
+        conversationId:
+          type: string
+        userId:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+        active:
+          type: boolean
+        lastJoinDate:
+          type: integer
+      required:
+        - id
+        - conversationId
+        - userId
+        - role
+        - active
+        - lastJoinDate
+    Role:
+      type: string
+      enum:
+        - Administrator
+        - Member
+        - Restricted
+        - Banned
+      title: Role
+      description: Represents the role and status of a conversation member
