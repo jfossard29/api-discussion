@@ -1,8 +1,8 @@
 package com.apidiscussion.mapper;
 import com.apidiscussion.entity.MemberEntity;
 import com.apidiscussion.entity.RoleEntity;
-import dto.Conversation.Member;
-import dto.Conversation.Role;
+import com.apidiscussion.dto.Member;
+import com.apidiscussion.dto.Role;
 
 public class MembreMapper {
 

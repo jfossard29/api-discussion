@@ -1,7 +1,7 @@
 package com.apidiscussion.mapper;
 
 import com.apidiscussion.entity.ConversationEntity;
-import dto.Conversation.Conversation;
+import com.apidiscussion.dto.Conversation;
 
 public class ConversationMapper {
     public Conversation toDto(ConversationEntity entity) {
