@@ -1,0 +1,12 @@
+image: gradle:8.5-jdk21
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+stages:
+  - build
+  - test
+
+include:
+  - local: '/ci/build.yml'
+  - local: '/ci/test.yml'

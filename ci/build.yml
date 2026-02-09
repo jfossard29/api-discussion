@@ -1,0 +1,10 @@
+compile_code:
+  stage: build
+  script:
+    - chmod +x gradlew
+    - ./gradlew assemble
+
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour

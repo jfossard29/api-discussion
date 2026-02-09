@@ -21,29 +21,17 @@ public class ConversationBusiness {
         this.membreRepository = membreRepository;
     }
 
-    public List<ConversationEntity> getAllConversations() {
-        return conversationRepository.getAllConversations();
-    }
+    public List<ConversationEntity> getAllConversations() {return conversationRepository.getAllConversations();}
 
-    public ConversationEntity getConversationById(String id) {
-        return conversationRepository.findById(id);
-    }
+    public ConversationEntity getConversationById(String id) {return conversationRepository.findById(id);}
 
-    public void createConversation(String name) {
-        conversationRepository.createConversation(name);
-    }
+    public void createConversation(String name) {conversationRepository.createConversation(name);}
 
-    public ConversationEntity updateName(String id, String name) {
-        return conversationRepository.updateConversationName(id, name);
-    }
+    public ConversationEntity updateName(String id, String name) {return conversationRepository.updateConversationName(id, name);}
 
-    public void deleteConversation(String id) {
-        conversationRepository.deleteConversation(id);
-    }
+    public void deleteConversation(String id) {conversationRepository.deleteConversation(id);}
 
-    public List<MemberEntity> getAllMembers(String id) {
-        return membreRepository.getAllMembers(id);
-    }
+    public List<MemberEntity> getAllMembers(String id) {return membreRepository.getAllMembers(id);}
 
     public List<MemberEntity> postMembers(String id, List<MemberEntity> members) {
         ConversationEntity conversation = membreRepository.postMembers(id, members);
